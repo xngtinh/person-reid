@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PHÁT HIỆN VÀ THEO VẾT NGƯỜI THÔNG QUA VIDEO GIÁM SÁT</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <link href="{{ url_for('static', filename='scripts/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
+    <style>
+      body {
+
+        background-image: url('static/background.png');
+      }
+    </style>
+</head>
+<body>
+
+<ol class="content">
+  <li class="content__item"></li>
+  <li class="content__item"></li>
+  <li class="content__item"><button id="startdemo" class="button button--mimas submit-button"><span>Start Demo</span></button></li>
+  <li class="content__item"></li>
+  <li class="content__item"></li>
+  <li class="content__item"><button id="startquery" class="button button--mimas submit-button"><span>Start Query</span></button></li>
+</ol>
+
+
+<script type="text/javascript">
+    document.getElementById("startdemo").onclick = function () {
+        location.href = "demo";
+    };
+</script>
+
+<script type="text/javascript">
+    document.getElementById("startquery").onclick = function () {
+        location.href = "query";
+    };
+</script>
+
+</body>
+</html>

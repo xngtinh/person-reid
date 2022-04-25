@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Example</title>
+</head>
+<body>
+<!--  <h2>Serving video files from Flask template</h2>-->
+  <center>
+    <video width="720" height="540" controls autoplay loop>
+    <source src={{ url_for('static', filename="demo4s.mp4") }} type="video/mp4">
+    </video>
+  </center>
+
+
+  <button id="toIntroduce" class="float-left submit-button" >Home</button>
+
+  <script type="text/javascript">
+      document.getElementById("toIntroduce").onclick = function () {
+          location.href = "/";
+      };
+  </script>
+
+</body>
+</html>

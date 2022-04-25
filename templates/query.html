@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<title>Python Flask File Upload Example</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
+    <script type=text/javascript> $(function() { $("#mybutton").click(function (event) { $.getJSON('/SomeFunction', { },
+    function(data) { }); return false; }); }); </script>
+</head>
+<body>
+	  <h2>Serving video files from Flask template</h2>
+	  <p>
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+			<ul>
+			{% for message in messages %}
+			  <li>{{ message }}</li>
+			{% endfor %}
+			</ul>
+		  {% endif %}
+		{% endwith %}
+	  </p>
+	  {% if filename %}
+	  		<div>
+				<img src="{{ url_for('display_image', filename=filename) }}">
+			</div>
+	  {% endif %}
+
+	  <form method="post" action="/" enctype="multipart/form-data">
+			<dl>
+				<p>
+					<input type="file" name="file" autocomplete="off" required>
+				</p>
+			</dl>
+			<p>
+				<input type="submit" value="Submit">
+			</p>
+	  </form>
+
+<button id="toQuery" class="float-left submit-button" >To Query Result</button>
+
+<script type="text/javascript">
+    document.getElementById("toQuery").onclick = function () {
+        location.href = "showquery";
+    };
+</script>
+
+</body>
+</html>

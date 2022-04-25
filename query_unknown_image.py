@@ -68,5 +68,5 @@ for i in range(4):
     imshow(img_path)
     ax.set_title('ID: %d' % (label), color='green')
 
-fig.savefig("static/show_batki.png")
+fig.savefig("static/show_unknown.png")
 

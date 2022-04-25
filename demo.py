@@ -33,7 +33,8 @@ def getFeature():
 # sort the images
 def sort_img(qf, ql, qc, gf, gl, gc):
     query = qf.view(-1,1)
-
+    print(query.shape)
+    print(gf.shape)
     # print(query.shape)
     score = torch.mm(gf,query)
     score = score.squeeze(1).cpu()
@@ -80,7 +81,7 @@ def visualize(index_list, query_label, query_path, image_datasets):
     fig.savefig("static/show"+str(numgocam)+".png")
 
 #####################################################################################
-def demo(query_path= r"static/Market-1501-v15.09.15/pytorch\query\0003\3_2_292.jpg"):
+def demo(query_path):
     data_dir = 'static/Market-1501-v15.09.15/pytorch'
     image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x)) for x in ['gallery', 'query']}
     i=0
@@ -137,4 +138,5 @@ def demo(query_path= r"static/Market-1501-v15.09.15/pytorch\query\0003\3_2_292.j
 
 #
 if __name__ == "__main__":
-    demo()
+    query_path = r"static/Market-1501-v15.09.15/pytorch\query\0003\3_1_2.jpg"
+    demo(query_path)

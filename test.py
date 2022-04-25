@@ -1,21 +1,7 @@
+s = ['static/Market-1501-v15.09.15/pytorch\\gallery_test\\0003\\3_2_319.jpg', 'static/Market-1501-v15.09.15/pytorch\\gallery_test\\0003\\3_2_320.jpg', 'static/Market-1501-v15.09.15/pytorch\\gallery_test\\0003\\3_2_313.jpg', 'static/Market-1501-v15.09.15/pytorch\\gallery_test\\0003\\3_2_312.jpg']
 
+print(s[0].split('_')[2])
 
-a = r"static/Market-1501-v15.09.15/pytorch\query\0002\2_1_112.jpg"
-
-b = r"static/Market-1501-v15.09.15/pytorch/query/0002/2_1_112.jpg"
-
-print(a)
-
-if a == b:
-    print('yes')
-else:
-    print('no')
-
-# txt = "static/Market-1501-v15.09.15/pytorch/query\0002\2_1_112.jpg"
+# label = int(s[0].split('_')[0][-1])
 #
-# x = txt.replace()
-#
-# print(x)
-filename = "10_2_258.jpg"
-id = filename.split('_')[0]
-print(id)
+# print(label)

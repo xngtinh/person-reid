@@ -51,6 +51,7 @@ def upload_image():
         flash('Image successfully uploaded and displayed below')
         id = filename.split('_')[0]
         query_path = r"static/Market-1501-v15.09.15/pytorch\query\000" + str(id) + "\\" + filename
+        print(query_path)
         demo(query_path=query_path)
         return render_template('query.html', filename=filename)
     else:

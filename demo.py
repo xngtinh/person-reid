@@ -33,9 +33,6 @@ def getFeature():
 # sort the images
 def sort_img(qf, ql, qc, gf, gl, gc):
     query = qf.view(-1,1)
-    print(query.shape)
-    print(gf.shape)
-    # print(query.shape)
     score = torch.mm(gf,query)
     score = score.squeeze(1).cpu()
     score = score.numpy()
@@ -59,7 +56,7 @@ def sort_img(qf, ql, qc, gf, gl, gc):
 #######################################################################
 def visualize(index_list, query_label, query_path, image_datasets):
     try:
-        numgocam = int(index_list[0].split('_')[1])
+        num_gocam = int(index_list[0].split('_')[1])
         fig = plt.figure(figsize=(16,4))
         ax = plt.subplot(1,11,1)
         ax.axis('off')
@@ -72,13 +69,13 @@ def visualize(index_list, query_label, query_path, image_datasets):
             label = int(index_list[0].split('_')[0][-1])
             imshow(img_path)
             if label == query_label:
-                ax.set_title('Cam: %d'%(numgocam), color='green')
+                ax.set_title('Cam: %d'%(num_gocam), color='green')
             else:
-                ax.set_title('Cam: %d'%(numgocam), color='red')
+                ax.set_title('Cam: %d'%(num_gocam), color='red')
     except RuntimeError:
         for i in range(10):
             img_path = image_datasets.imgs[index_list[i]]
-    fig.savefig("static/show"+str(numgocam)+".png")
+    fig.savefig("static/show"+str(num_gocam)+".png")
 
 #####################################################################################
 def demo(query_path):
@@ -101,6 +98,9 @@ def demo(query_path):
     index_B = []
     index_C = []
     index_D = []
+    index_E = []
+    index_F = []
+
 
     for ii in range(0, 100):
         iter = index[ii]
@@ -118,7 +118,10 @@ def demo(query_path):
             index_C.append(path_gallery)
         elif numcam == '4' and numidquery == numidgallery:
             index_D.append(path_gallery)
-
+        elif numcam == '5' and numidquery == numidgallery:
+            index_E.append(path_gallery)
+        elif numcam == '6' and numidquery == numidgallery:
+            index_F.append(path_gallery)
     #######################################################################
 
     query_path, _ = image_datasets['query'].imgs[i]
@@ -136,7 +139,13 @@ def demo(query_path):
     if len(index_D) != 0:
         visualize(index_D, query_label, query_path, image_datasets)
 
+    if len(index_E) != 0:
+        visualize(index_E, query_label, query_path, image_datasets)
+
+    if len(index_F) != 0:
+        visualize(index_F, query_label, query_path, image_datasets)
+
 #
 if __name__ == "__main__":
-    query_path = r"static/Market-1501-v15.09.15/pytorch\query\0003\3_1_2.jpg"
+    query_path = r"static/Market-1501-v15.09.15/pytorch\query\0001\1_1_44.jpg"
     demo(query_path)

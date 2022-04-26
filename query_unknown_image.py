@@ -42,7 +42,7 @@ sorted_res = dict(sorted(res.items(), key=lambda kv: kv[1]))
 
 lst_show = []
 for k in sorted_res.keys():
-    if len(lst_show) <= 3:
+    if len(lst_show) <= 5:
         lst_show.append(k)
 
 def imshow(path, title=None):
@@ -53,18 +53,19 @@ def imshow(path, title=None):
         plt.title(title)
     plt.pause(0.005)
 
-query_path = glob.glob("static/Market-1501-v15.09.15/pytorch/query_images/0000/*.jpg")
+query_path = glob.glob("static/Market-1501-v15.09.15/pytorch/unknown_images/0000/unknown.jpg")
 
 fig = plt.figure(figsize=(16,4))
-ax = plt.subplot(1,5,1)
+ax = plt.subplot(1,6,1)
 ax.axis('off')
 imshow(query_path[0],'unknown image')
-for i in range(4):
-    ax = plt.subplot(1,5,i+2)
+for i in range(5):
+    ax = plt.subplot(1,6,i+2)
     ax.axis('off')
     img_path = lst_show[i]
+    print(img_path)
     # label = gallery_label[index[i]]
-    label = int(lst_show[i].split('_')[1][-1])
+    label = int(lst_show[i].split('\\')[2])
     imshow(img_path)
     ax.set_title('ID: %d' % (label), color='green')
 

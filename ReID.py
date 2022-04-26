@@ -20,9 +20,9 @@ data_transforms = transforms.Compose([
 ])
 
 data_dir = "static/Market-1501-v15.09.15/pytorch"
-image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x), data_transforms) for x in ['gallery_test', 'query_images']}
+image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x), data_transforms) for x in ['gallery', 'unknown_images']}
 dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=32,
-                                              shuffle=False, num_workers=8) for x in ['gallery_test', 'query_images']}
+                                              shuffle=False, num_workers=8) for x in ['gallery', 'unknown_images']}
 
 ######################################################################
 # Load model
@@ -96,7 +96,7 @@ def features(model, imgs):
 #######################################################################################################
 
 
-query_path = image_datasets['query_images'].imgs
+query_path = image_datasets['unknown_images'].imgs
 
 def extract_feature_unknown_image():
     list_images_query = []
@@ -127,12 +127,12 @@ def extract_feature_unknown_image():
 
 # extract features gallery images
 
-# gallery_path = image_datasets['gallery_test'].imgs
-
+# gallery_path = image_datasets['gallery'].imgs
+#
 # list_images_gallery = []
 # for i in range(len(gallery_path)):
 #     list_images_gallery.append(gallery_path[i][0])
-
+#
 # gallery_feature, list_name_gallery_image = features(model, list_images_gallery)
 #
 # lst_gallery_features = []

@@ -101,7 +101,7 @@ def demo(query_path):
     index_D = []
     index_E = []
     index_F = []
-    for ii in range(0, 200):
+    for ii in range(0, 500):
         iter = index[ii]
         path_gallery = image_datasets['gallery'].imgs[iter][0]
         numcam = path_gallery.split("_")[1]
@@ -120,19 +120,7 @@ def demo(query_path):
             index_E.append(path_gallery)
         elif numcam == '6' and numidquery == numidgallery:
             index_F.append(path_gallery)
-<<<<<<< Updated upstream
 
-    print(len(index_A))
-    print(len(index_B))
-    print(len(index_C))
-    print(len(index_D))
-    print(len(index_E))
-    print(len(index_F))
-
-
-    #######################################################################
-
-=======
     # print(len(index_A))
     # print(len(index_B))
     # print(len(index_C))
@@ -151,7 +139,7 @@ def demo(query_path):
     query_label = query_label[i]
     shutil.rmtree('D:\KLTN\person-reid\static\show')
     os.mkdir('D:\KLTN\person-reid\static\show')
->>>>>>> Stashed changes
+
     if len(index_A) != 0:
         visualize(index_A, numidquery, query_path, image_datasets)
 

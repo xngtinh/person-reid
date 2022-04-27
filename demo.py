@@ -6,6 +6,7 @@ import time
 import os
 from torchvision import datasets
 import matplotlib.pyplot as plt
+import shutil
 
 #####################################################################
 #Show result
@@ -58,23 +59,25 @@ def visualize(index_list, query_label, query_path, image_datasets):
     try:
         num_gocam = int(index_list[0].split('_')[1])
         fig = plt.figure(figsize=(16,4))
-        ax = plt.subplot(1,11,1)
-        ax.axis('off')
-        imshow(query_path,'query')
+        # ax = plt.subplot(1,11,1)
+        # ax.axis('off')
+        # imshow(query_path,'query')
         for i in range(10):
             ax = plt.subplot(1,11,i+2)
             ax.axis('off')
             img_path = index_list[i]
             label = int(index_list[0].split('\\')[2])
             imshow(img_path)
-            if label == query_label:
-                ax.set_title('Cam: %d'%(num_gocam), color='green')
-            else:
-                ax.set_title('Cam: %d'%(num_gocam), color='red')
-    except RuntimeError:
-        for i in range(10):
-            img_path = image_datasets.imgs[index_list[i]]
-    fig.savefig("static/show"+str(num_gocam)+".png")
+            # if label == query_label:
+            #     ax.set_title('Cam: %d'%(num_gocam), color='green')
+            # else:
+            #     ax.set_title('Cam: %d'%(num_gocam), color='red')
+    # except RuntimeError:
+    #     for i in range(10):
+    #         img_path = image_datasets.imgs[index_list[i]]
+    except Exception as e:
+        print(e)
+    fig.savefig("static/show/cam"+str(num_gocam)+".png")
 
 #####################################################################################
 def demo(query_path):
@@ -117,6 +120,7 @@ def demo(query_path):
             index_E.append(path_gallery)
         elif numcam == '6' and numidquery == numidgallery:
             index_F.append(path_gallery)
+<<<<<<< Updated upstream
 
     print(len(index_A))
     print(len(index_B))
@@ -128,6 +132,26 @@ def demo(query_path):
 
     #######################################################################
 
+=======
+    # print(len(index_A))
+    # print(len(index_B))
+    # print(len(index_C))
+    # print(len(index_D))
+    # print(len(index_E))
+    # print(len(index_F))
+    print(index_A)
+    print(index_B)
+    print(index_C)
+    print(index_D)
+    print(index_E)
+    print(index_F)
+    #######################################################################
+
+    query_path, _ = image_datasets['query'].imgs[i]
+    query_label = query_label[i]
+    shutil.rmtree('D:\KLTN\person-reid\static\show')
+    os.mkdir('D:\KLTN\person-reid\static\show')
+>>>>>>> Stashed changes
     if len(index_A) != 0:
         visualize(index_A, numidquery, query_path, image_datasets)
 

@@ -5,6 +5,8 @@ import numpy as np
 import time
 import os
 from torchvision import datasets
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import shutil
 
@@ -63,15 +65,15 @@ def visualize(index_list, query_label, query_path, image_datasets):
         # ax.axis('off')
         # imshow(query_path,'query')
         for i in range(10):
-            ax = plt.subplot(1,11,i+2)
+            ax = plt.subplot(1,11,i+1)
             ax.axis('off')
             img_path = index_list[i]
             label = int(index_list[0].split('\\')[2])
             imshow(img_path)
-            # if label == query_label:
-            #     ax.set_title('Cam: %d'%(num_gocam), color='green')
-            # else:
-            #     ax.set_title('Cam: %d'%(num_gocam), color='red')
+            if label == query_label:
+                ax.set_title('Cam: %d'%(num_gocam), color='green')
+            else:
+                ax.set_title('Cam: %d'%(num_gocam), color='red')
     # except RuntimeError:
     #     for i in range(10):
     #         img_path = image_datasets.imgs[index_list[i]]
@@ -112,7 +114,7 @@ def demo(query_path):
             index_A.append(path_gallery)
         elif numcam == '2' and numidquery == numidgallery:
             index_B.append(path_gallery)
-        elif numcam == '3':
+        elif numcam == '3' and numidquery == numidgallery:
             index_C.append(path_gallery)
         elif numcam == '4' and numidquery == numidgallery:
             index_D.append(path_gallery)
@@ -120,19 +122,9 @@ def demo(query_path):
             index_E.append(path_gallery)
         elif numcam == '6' and numidquery == numidgallery:
             index_F.append(path_gallery)
-<<<<<<< Updated upstream
-
-    print(len(index_A))
-    print(len(index_B))
-    print(len(index_C))
-    print(len(index_D))
-    print(len(index_E))
-    print(len(index_F))
 
 
     #######################################################################
-
-=======
     # print(len(index_A))
     # print(len(index_B))
     # print(len(index_C))
@@ -151,7 +143,7 @@ def demo(query_path):
     query_label = query_label[i]
     shutil.rmtree('D:\KLTN\person-reid\static\show')
     os.mkdir('D:\KLTN\person-reid\static\show')
->>>>>>> Stashed changes
+
     if len(index_A) != 0:
         visualize(index_A, numidquery, query_path, image_datasets)
 

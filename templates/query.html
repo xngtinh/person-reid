@@ -6,7 +6,7 @@
     <script type=text/javascript> $(function() { $("#mybutton").click(function (event) { $.getJSON('/SomeFunction', { },
     function(data) { }); return false; }); }); </script>
 </head>
-<body>
+<body >
 	  {% if filename %}
 	  		<div style="margin-top: 50px; width: 60%; text-align: center; margin: auto;">
 				<img src="{{ url_for('display_image', filename=filename) }}">
@@ -27,11 +27,12 @@
 
 	  {% if filename %}
 	  		<div>
+<!--				<hr>-->
 				{% for i in video_files:%}
 					<div>
-						<h6>{{"CAMERA " + i.split(".")[0][-1]}}</h6>
+						<h2 style="background-color:powderblue;">{{"CAMERA " + i.split(".")[0][-1]}}</h2>
 						<image src="{{url_for('static',filename = 'show/'+"% s" % i)}}" >
-						<hr>
+<!--						<hr>-->
 					</div>
 				{% endfor %}
 			</div>

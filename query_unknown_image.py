@@ -68,5 +68,7 @@ def show_unknown():
 
     fig.savefig("static/show_unknown.png")
 
+show_unknown()
+
 
 

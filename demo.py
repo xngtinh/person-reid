@@ -103,7 +103,7 @@ def demo(query_path):
     index_D = []
     index_E = []
     index_F = []
-    for ii in range(0, 200):
+    for ii in range(0, 500):
         iter = index[ii]
         path_gallery = image_datasets['gallery'].imgs[iter][0]
         numcam = path_gallery.split("_")[1]
@@ -123,8 +123,11 @@ def demo(query_path):
         elif numcam == '6' and numidquery == numidgallery:
             index_F.append(path_gallery)
 
+<<<<<<< HEAD
 
     #######################################################################
+=======
+>>>>>>> 485515c2b4ab1a0f1e476aff0049777fcbaa5d54
     # print(len(index_A))
     # print(len(index_B))
     # print(len(index_C))

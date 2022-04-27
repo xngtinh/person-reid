@@ -50,6 +50,7 @@ def features(model, imgs):
     list_name_image = []
     features_total = []
     for img in imgs:
+        print(img)
         list_name_image.append(img)
         directory = img
         img = Image.open(directory)
@@ -76,19 +77,19 @@ def features(model, imgs):
     return features_total, list_name_image
 
 #######################################################################################################
-# model_structure = PCB(2220)
-#
-# model_structure = model_structure.convert_to_rpp()
-#
-# model = load_network(model_structure)
-#
-# model = PCB_test(model, True)
-#
-# # Change to test mode
-# model = model.eval()
+model_structure = PCB(2220)
+
+model_structure = model_structure.convert_to_rpp()
+
+model = load_network(model_structure)
+
+model = PCB_test(model, True)
+
+# Change to test mode
+model = model.eval()
 
 # query_feature, list_name_query_image = features(model, list_images_query)
-#
+
 # lst_query_features = []
 # for i in range(0, len(query_feature[0])):
 #     query_feature_i = query_feature[0][i]
@@ -96,7 +97,7 @@ def features(model, imgs):
 #######################################################################################################
 
 
-query_path = image_datasets['unknown_images'].imgs
+# query_path = image_datasets['unknown_images'].imgs
 
 def extract_feature_unknown_image():
     list_images_query = []
@@ -127,34 +128,34 @@ def extract_feature_unknown_image():
 
 # extract features gallery images
 
-# gallery_path = image_datasets['gallery'].imgs
+gallery_path = image_datasets['gallery'].imgs
+
+list_images_gallery = []
+for i in range(len(gallery_path)):
+    list_images_gallery.append(gallery_path[i][0])
+
+gallery_feature, list_name_gallery_image = features(model, list_images_gallery)
+
+lst_gallery_features = []
+for i in range(0, len(gallery_feature[0])):
+    gallery_feature_i = gallery_feature[0][i].numpy()
+    lst_gallery_features.append(gallery_feature_i)
+
+
+res = {}
+for key in list_name_gallery_image:
+    for value in lst_gallery_features:
+        arr_value = value.tolist()
+        res[key] = arr_value
+        lst_gallery_features.remove(value)
+        break
 #
-# list_images_gallery = []
-# for i in range(len(gallery_path)):
-#     list_images_gallery.append(gallery_path[i][0])
-#
-# gallery_feature, list_name_gallery_image = features(model, list_images_gallery)
-#
-# lst_gallery_features = []
-# for i in range(0, len(gallery_feature[0])):
-#     gallery_feature_i = gallery_feature[0][i].numpy()
-#     lst_gallery_features.append(gallery_feature_i)
-#
-#
-# res = {}
-# for key in list_name_gallery_image:
-#     for value in lst_gallery_features:
-#         arr_value = value.tolist()
-#         res[key] = arr_value
-#         lst_gallery_features.remove(value)
-#         break
-# #
-# f = open("dict_image_feature.txt", "w")
-# f.write("{\n")
-# for k in res.keys():
-#     f.write("r'{}':{},\n".format(k, res[k]))
-# f.write("}")
-# f.close()
+f = open("dict_image_feature.txt", "w")
+f.write("{\n")
+for k in res.keys():
+    f.write("r'{}':{},\n".format(k, res[k]))
+f.write("}")
+f.close()
 
 
 

@@ -5,15 +5,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import glob
 
-
-feature_unknown = extract_feature_unknown_image()
-xx = feature_unknown.reshape(2, -1)
-
-file = open("dict_image_feature.txt", "r")
-
-contents = file.read()
-dictionary = ast.literal_eval(contents)
-file.close()
+def imshow(path, title=None):
+    """Imshow for Tensor."""
+    im = plt.imread(path)
+    plt.imshow(im)
+    if title is not None:
+        plt.title(title)
+    plt.pause(0.005)
 
 def sort_img(feature_unknown, dictionary):
     lst_image = []
@@ -27,47 +25,48 @@ def sort_img(feature_unknown, dictionary):
 
     return lst_image, lst_dist
 
-lst_image, lst_dist = sort_img(xx, dictionary)
+def show_unknown():
+    feature_unknown = extract_feature_unknown_image()
+    xx = feature_unknown.reshape(2, -1)
 
-res = {}
-for key in lst_image:
-    for value in lst_dist:
-        arr_value = value.tolist()
-        res[key] = arr_value
-        lst_dist.remove(value)
-        break
+    file = open("dict_image_feature.txt", "r")
 
+    contents = file.read()
+    dictionary = ast.literal_eval(contents)
+    file.close()
 
-sorted_res = dict(sorted(res.items(), key=lambda kv: kv[1]))
+    lst_image, lst_dist = sort_img(xx, dictionary)
 
-lst_show = []
-for k in sorted_res.keys():
-    if len(lst_show) <= 5:
-        lst_show.append(k)
+    res = {}
+    for key in lst_image:
+        for value in lst_dist:
+            arr_value = value.tolist()
+            res[key] = arr_value
+            lst_dist.remove(value)
+            break
 
-def imshow(path, title=None):
-    """Imshow for Tensor."""
-    im = plt.imread(path)
-    plt.imshow(im)
-    if title is not None:
-        plt.title(title)
-    plt.pause(0.005)
+    sorted_res = dict(sorted(res.items(), key=lambda kv: kv[1]))
 
-query_path = glob.glob("static/Market-1501-v15.09.15/pytorch/unknown_images/0000/unknown.jpg")
+    lst_show = []
+    for k in sorted_res.keys():
+        if len(lst_show) <= 5:
+            lst_show.append(k)
 
-fig = plt.figure(figsize=(16,4))
-ax = plt.subplot(1,6,1)
-ax.axis('off')
-imshow(query_path[0],'unknown image')
-for i in range(5):
-    ax = plt.subplot(1,6,i+2)
+    query_path = glob.glob("static/Market-1501-v15.09.15/pytorch/unknown_images/0000/unknown.jpg")
+
+    fig = plt.figure(figsize=(16,4))
+    ax = plt.subplot(1,6,1)
     ax.axis('off')
-    img_path = lst_show[i]
-    print(img_path)
-    # label = gallery_label[index[i]]
-    label = int(lst_show[i].split('\\')[2])
-    imshow(img_path)
-    ax.set_title('ID: %d' % (label), color='green')
+    imshow(query_path[0],'unknown image')
+    for i in range(5):
+        ax = plt.subplot(1,6,i+2)
+        ax.axis('off')
+        img_path = lst_show[i]
+        label = int(lst_show[i].split('\\')[2])
+        imshow(img_path)
+        ax.set_title('ID: %d' % (label), color='green')
 
-fig.savefig("static/show_unknown.png")
+    fig.savefig("static/show_unknown.png")
+
+
 

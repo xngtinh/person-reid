@@ -6,7 +6,7 @@ from demo import *
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'static/uploads/'
+UPLOAD_FOLDER = r'static/Market-1501-v15.09.15/pytorch\query\\'
 
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -42,17 +42,15 @@ def upload_image():
         return redirect(request.url)
     file = request.files['file']
     if file.filename == '':
-        flash('No image selected for uploading')
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        # print('upload_image filename: ' + filename)
-        flash('Image successfully uploaded and displayed below')
+
         id = filename.split('_')[0]
-        query_path = r"static/Market-1501-v15.09.15/pytorch\query\000" + str(id) + "\\" + filename
+        query_path ="%04d" % int(id) + "\\" + filename
         print(query_path)
-        demo(query_path=query_path)
+        demo(query_path=r'static/Market-1501-v15.09.15/pytorch\query'+ "\\" + str(query_path))
         return render_template('query.html', filename=filename)
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
@@ -60,8 +58,7 @@ def upload_image():
 
 @app.route('/display/<filename>')
 def display_image(filename):
-    # print('display_image filename: ' + filename)
-    return redirect(url_for('static', filename='uploads/' + filename), code=301)
+    return redirect(url_for('static', filename="Market-1501-v15.09.15/pytorch/query/" + "%04d" % int(filename.split('_')[0]) + "/" + filename), code=301)
 
 @app.route('/showquery')
 def showquery():

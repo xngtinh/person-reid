@@ -65,8 +65,7 @@ def visualize(index_list, query_label, query_path, image_datasets):
             ax = plt.subplot(1,11,i+2)
             ax.axis('off')
             img_path = index_list[i]
-            # label = gallery_label[index[i]]
-            label = int(index_list[0].split('_')[0][-1])
+            label = int(index_list[0].split('\\')[2])
             imshow(img_path)
             if label == query_label:
                 ax.set_title('Cam: %d'%(num_gocam), color='green')
@@ -81,10 +80,9 @@ def visualize(index_list, query_label, query_path, image_datasets):
 def demo(query_path):
     data_dir = 'static/Market-1501-v15.09.15/pytorch'
     image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x)) for x in ['gallery', 'query']}
+
     i=0
-
-    numidquery = query_path.split("_")[0][-1]
-
+    numidquery = int(query_path.split('\\')[2])
     for j in range(0, len(image_datasets['query'].imgs)):
         path = image_datasets['query'].imgs[j][0]
         if path == query_path:
@@ -100,21 +98,18 @@ def demo(query_path):
     index_D = []
     index_E = []
     index_F = []
-
-
-    for ii in range(0, 100):
+    for ii in range(0, 200):
         iter = index[ii]
         path_gallery = image_datasets['gallery'].imgs[iter][0]
-
         numcam = path_gallery.split("_")[1]
+        numidgallery = int(path_gallery.split('\\')[2])
 
-        numidgallery = path_gallery.split("_")[0][-1]
 
         if numcam == '1' and numidquery == numidgallery:
             index_A.append(path_gallery)
         elif numcam == '2' and numidquery == numidgallery:
             index_B.append(path_gallery)
-        elif numcam == '3' and numidquery == numidgallery:
+        elif numcam == '3':
             index_C.append(path_gallery)
         elif numcam == '4' and numidquery == numidgallery:
             index_D.append(path_gallery)
@@ -122,30 +117,34 @@ def demo(query_path):
             index_E.append(path_gallery)
         elif numcam == '6' and numidquery == numidgallery:
             index_F.append(path_gallery)
+
+    print(len(index_A))
+    print(len(index_B))
+    print(len(index_C))
+    print(len(index_D))
+    print(len(index_E))
+    print(len(index_F))
+
+
     #######################################################################
 
-    query_path, _ = image_datasets['query'].imgs[i]
-    query_label = query_label[i]
-
     if len(index_A) != 0:
-        visualize(index_A, query_label, query_path, image_datasets)
+        visualize(index_A, numidquery, query_path, image_datasets)
 
     if len(index_B) != 0:
-        visualize(index_B, query_label, query_path, image_datasets)
+        visualize(index_B, numidquery, query_path, image_datasets)
 
     if len(index_C) != 0:
-        visualize(index_C, query_label, query_path, image_datasets)
+        visualize(index_C, numidquery, query_path, image_datasets)
 
     if len(index_D) != 0:
-        visualize(index_D, query_label, query_path, image_datasets)
+        visualize(index_D, numidquery, query_path, image_datasets)
 
     if len(index_E) != 0:
-        visualize(index_E, query_label, query_path, image_datasets)
+        visualize(index_E, numidquery, query_path, image_datasets)
 
     if len(index_F) != 0:
-        visualize(index_F, query_label, query_path, image_datasets)
+        visualize(index_F, numidquery, query_path, image_datasets)
 
-#
 if __name__ == "__main__":
-    query_path = r"static/Market-1501-v15.09.15/pytorch\query\0001\1_1_44.jpg"
     demo(query_path)

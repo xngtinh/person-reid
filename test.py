@@ -1,4 +1,5 @@
-s = r"static/Market-1501-v15.09.15/pytorch\gallery\0014\14_3_372.jpg"
+s = r"static/Market-1501-v15.09.15/pytorch\query\0026\26_5_859.jpg"
+
 ss = s.split('\\')[2]
 print(int(ss))
 

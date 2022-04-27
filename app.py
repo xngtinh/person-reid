@@ -31,11 +31,11 @@ def index():
 def result():
     return render_template('result.html')
 
-@app.route('/query')
+@app.route('/query', methods=['GET'])
 def query():
     return render_template('query.html')
 
-@app.route('/', methods=['POST'])
+@app.route('/query', methods=['POST'])
 def upload_image():
     if 'file' not in request.files:
         flash('No file part')
@@ -50,8 +50,22 @@ def upload_image():
         id = filename.split('_')[0]
         query_path ="%04d" % int(id) + "\\" + filename
         print(query_path)
+<<<<<<< Updated upstream
         demo(query_path=r'static/Market-1501-v15.09.15/pytorch\query'+ "\\" + str(query_path))
         return render_template('query.html', filename=filename)
+=======
+        demo(query_path=query_path)
+        files = []
+        num = []
+        # r=root, d=directories, f = files
+        for r, d, f in os.walk('D:\KLTN\person-reid\static\show'):
+            for file in f:
+                if file.find('png') > -1:
+                    files.append(file)
+                    num.append(file.split(".")[0][-1])
+
+        return render_template('query.html', filename=filename, video_files=files, num=num)
+>>>>>>> Stashed changes
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)

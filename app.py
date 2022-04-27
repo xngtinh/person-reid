@@ -62,13 +62,9 @@ def upload_image():
         id = filename.split('_')[0]
         query_path ="%04d" % int(id) + "\\" + filename
         print(query_path)
-<<<<<<< HEAD
-        demo(query_path=r'static/Market-1501-v15.09.15/pytorch\query'+ "\\" + str(query_path))
-=======
 
         demo(query_path=r'static/Market-1501-v15.09.15/pytorch\query'+ "\\" + str(query_path))
 
->>>>>>> 485515c2b4ab1a0f1e476aff0049777fcbaa5d54
         files = []
         num = []
         # r=root, d=directories, f = files
@@ -79,10 +75,6 @@ def upload_image():
                     num.append(file.split(".")[0][-1])
 
         return render_template('query.html', filename=filename, video_files=files, num=num)
-<<<<<<< HEAD
-=======
-
->>>>>>> 485515c2b4ab1a0f1e476aff0049777fcbaa5d54
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)

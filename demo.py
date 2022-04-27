@@ -123,11 +123,6 @@ def demo(query_path):
         elif numcam == '6' and numidquery == numidgallery:
             index_F.append(path_gallery)
 
-<<<<<<< HEAD
-
-    #######################################################################
-=======
->>>>>>> 485515c2b4ab1a0f1e476aff0049777fcbaa5d54
     # print(len(index_A))
     # print(len(index_B))
     # print(len(index_C))

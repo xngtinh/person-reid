@@ -1,12 +1,13 @@
 from flask import Flask, flash, request, redirect, url_for, render_template
 import urllib.request
 import os
+os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 from werkzeug.utils import secure_filename
 from demo import *
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-UPLOAD_FOLDER = r'static/Market-1501-v15.09.15/pytorch\query\\'
+UPLOAD_FOLDER = r'static/uploads\\'
 
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

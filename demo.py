@@ -61,9 +61,6 @@ def visualize(index_list, query_label, query_path, image_datasets):
     try:
         num_gocam = int(index_list[0].split('_')[1])
         fig = plt.figure(figsize=(16,4))
-        # ax = plt.subplot(1,11,1)
-        # ax.axis('off')
-        # imshow(query_path,'query')
         for i in range(10):
             ax = plt.subplot(1,11,i+1)
             ax.axis('off')
@@ -74,9 +71,6 @@ def visualize(index_list, query_label, query_path, image_datasets):
                 ax.set_title('Cam: %d'%(num_gocam), color='green')
             else:
                 ax.set_title('Cam: %d'%(num_gocam), color='red')
-    # except RuntimeError:
-    #     for i in range(10):
-    #         img_path = image_datasets.imgs[index_list[i]]
     except Exception as e:
         print(e)
     fig.savefig("static/show/cam"+str(num_gocam)+".png")
@@ -122,19 +116,6 @@ def demo(query_path):
             index_E.append(path_gallery)
         elif numcam == '6' and numidquery == numidgallery:
             index_F.append(path_gallery)
-
-    # print(len(index_A))
-    # print(len(index_B))
-    # print(len(index_C))
-    # print(len(index_D))
-    # print(len(index_E))
-    # print(len(index_F))
-    print(index_A)
-    print(index_B)
-    print(index_C)
-    print(index_D)
-    print(index_E)
-    print(index_F)
     #######################################################################
 
     query_path, _ = image_datasets['query'].imgs[i]

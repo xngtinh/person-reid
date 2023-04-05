@@ -84,9 +84,5 @@ def upload_image():
 def display_image(filename):
     return redirect(url_for('static', filename="Market-1501-v15.09.15/pytorch/query/" + "%04d" % int(filename.split('_')[0]) + "/" + filename), code=301)
 
-@app.route('/showquery')
-def showquery():
-    return render_template('showquery.html')
-
 if __name__=='__main__':
     app.run(debug=True)
